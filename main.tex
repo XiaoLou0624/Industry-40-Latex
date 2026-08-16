@@ -1,0 +1,63 @@
+% !TeX program = xelatex
+\documentclass[UTF8,11pt,a4paper]{ctexart}
+
+% Common packages
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\graphicspath{{assets/}}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{subcaption}
+
+% Paragraph formatting: no first-line indent, with a small gap between paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em plus 0.1em minus 0.1em}
+\setlist{itemsep=0pt,parsep=0pt}
+
+% Display paragraph headings on their own line instead of as run-in headings
+\titleformat{\paragraph}[block]
+  {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{1.5ex plus 0.2ex minus 0.2ex}{0.5em}
+
+% English names for floats and headings (ctex defaults to Chinese)
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\contentsname}{目录}
+\numberwithin{figure}{section}
+
+% Document information
+\title{%
+  {\Huge 工业4.0}\\[0.4em]
+  {\Large Industrie 4.0 für Ingenieure}\\[0.8em]
+  {\small 课程总结}%
+}
+\author{作者：楼骁}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\maketitle
+\clearpage
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% Main content starts here (each major section starts on a new page)
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
+\input{einfuehrung}
+\input{steuerung}
+\input{industrierobotik1}
+\input{industrierobotik2}
+\input{mmi}
+\input{dermensch}
+\input{sensorsysteme}
+\input{lokalisierung}
+\input{industrialdatascience}
+\input{ai-ml.tex}
+
+\end{document}

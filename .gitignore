@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+main.pdf
+_to_delete/
