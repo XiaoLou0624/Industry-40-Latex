@@ -1,3 +1,4 @@
+% !TeX root = main.tex
 \section{工业数据科学}
 
 \subsection{引言}
@@ -15,18 +16,26 @@
 \end{itemize}
 往后走，能带来的业务价值越大，技术难度也越高。喷油器案例做的正是"预测性分析"，这条线索会贯穿全文。
 
-两个直观的数字可以补充说明数据规模的增长：全球每年产生的数字数据量预计从 2005 年的 130 艾字节，一路涨到 2025 年的 175,000 艾字节，年增长率约 30\%；企业自己产生的数据占比也会从 2015 年的 30\% 涨到 2025 年预计的 60\%。描述这类海量、复杂数据的特征，通常用大数据领域常说的3V：Volume（容量）、Velocity（速度）、Variety（多样性）。数据量级从太字节到泽字节不等，有批量处理的也有实时产生的数据流，结构化、非结构化、半结构化数据混杂在一起。至于工具，2014 年的一份行业调查显示，RapidMiner、R、Excel、SQL、Python 是当时最常用的几款，具体排名会随时代变化，留个印象即可。
+两个直观的数字可以补充说明数据规模的增长：全球每年产生的数字数据量预计从 2005 年的 130 艾字节，一路涨到 2025 年的 175,000 艾字节，年增长率约 30\%；企业自己产生的数据占比也会从 2015 年的 30\% 涨到 2025 年预计的 60\%。
+
+描述这类海量、复杂数据的特征，通常用\textbf{大数据领域常说的3V}：
+\begin{itemize}
+    \item Volume（容量）
+    \item Velocity（速度）
+    \item Variety（多样性）
+\end{itemize}
+数据量级从太字节到泽字节不等，有批量处理的也有实时产生的数据流，结构化、非结构化、半结构化数据混杂在一起。至于工具，2014 年的一份行业调查显示，RapidMiner、R、Excel、SQL、Python 是当时最常用的几款，具体排名会随时代变化，留个印象即可。
 
 \subsection{CRISP-DM}
 
-接下来用一套业界通用的方法论 CRISP-DM（Cross-Industry Standard Process for Data Mining，跨行业数据挖掘标准流程）把喷油器案例串起来。这套方法论把一个完整的数据科学项目拆成六个阶段：
+接下来用一套业界通用的方法论 \textbf{CRISP-DM（Cross-Industry Standard Process for Data Mining，跨行业数据挖掘标准流程）}把喷油器案例串起来。这套方法论把一个完整的数据科学项目拆成六个阶段：
 \begin{enumerate}
-    \item 业务理解（Business Understanding）：搞清楚项目到底要解决什么问题
-    \item 数据理解（Data Understanding）：搞清楚手头有什么数据、质量如何
-    \item 数据准备（Data Preparation）：把原始数据加工成能喂给模型的形式
-    \item 建模（Modeling）：选择合适的算法，训练模型
-    \item 评估（Evaluation）：判断模型到底好不好用
-    \item 部署（Deployment）：把模型真正用到实际生产决策中去
+    \item \textbf{业务理解（Business Understanding）}：搞清楚项目到底要解决什么问题
+    \item \textbf{数据理解（Data Understanding）}：搞清楚手头有什么数据、质量如何
+    \item \textbf{数据准备（Data Preparation）}：把原始数据加工成能喂给模型的形式
+    \item \textbf{建模（Modeling）}：选择合适的算法，训练模型
+    \item \textbf{评估（Evaluation）}：判断模型到底好不好用
+    \item \textbf{部署（Deployment）}：把模型真正用到实际生产决策中去
 \end{enumerate}
 这六个阶段不是一次性走完就结束的直线流程，而是一个可以循环迭代的闭环。评估阶段发现问题，往往要回头重新做数据准备甚至业务理解。
 
@@ -60,19 +69,19 @@
 
 模型训练完了，还需要一套指标来判断它靠不靠谱。标准做法是用混淆矩阵框架，把预测结果和真实结果交叉对比，划分出四种情况：
 \begin{itemize}
-    \item 阳性（TP）：预测不合格，实际也确实不合格
-    \item 假阳性（FP）：预测不合格，但实际是合格的，伪错误。意味着模型"多疑"，把好产品误判成了坏产品
-    \item 假阴性（FN）：预测合格，但实际是不合格的，这类错误被称为漏检，是更危险的一种错误，意味着有缺陷产品被放过去了
-    \item 真阴性（TN）：预测合格，实际也确实合格
+    \item \textbf{阳性（TP）}：预测不合格，实际也确实不合格
+    \item \textbf{假阳性（Pseudofehlerrate, FP）}：预测不合格，但实际是合格的，伪错误。意味着模型"多疑"，把好产品误判成了坏产品
+    \item \textbf{假阴性（Schlupfrate, FN）}：预测合格，但实际是不合格的，这类错误被称为漏检，是更危险的一种错误，意味着有缺陷产品被放过去了
+    \item \textbf{真阴性（TN）}：预测合格，实际也确实合格
 \end{itemize}
 在这四个数字的基础上，可以算出一整套评估指标：
 \begin{itemize}
-    \item 精确率（Precision）衡量被预测为不合格的产品里，有多少是真的不合格
-    \item 召回率（Recall）衡量所有真正不合格的产品里，有多少被成功抓出来了
-    \item 特异度（Specificity）衡量所有真正合格的产品里，有多少被正确放行了
-    \item 准确率（Accuracy）则是预测正确的比例，也就是 (TP+TN) / 全部样本数
-    \item 伪错误率：FP 占比
-    \item 漏检率：FN 占比
+    \item\textbf{精确率（Precision）}衡量被预测为不合格的产品里，有多少是真的不合格
+    \item \textbf{召回率（Recall）}衡量所有真正不合格的产品里，有多少被成功抓出来了
+    \item \textbf{特异度（Specificity）}衡量所有真正合格的产品里，有多少被正确放行了
+    \item \textbf{准确率（Accuracy）}则是预测正确的比例，也就是 (TP+TN) / 全部样本数
+    \item \textbf{伪错误率}：FP 占比
+    \item \textbf{漏检率}：FN 占比
 \end{itemize}
 朴素贝叶斯算法在真实喷油器数据上跑出的结果可以说明问题：整体准确率达到 96.15\%，但召回率只有 33.83\%，也就是说，虽然总体判断准确，但真正能抓出来的不合格品其实只占三分之一左右。这说明单看准确率会掩盖问题，必须结合多个指标一起看。
 
